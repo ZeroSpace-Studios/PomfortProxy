@@ -81,7 +81,7 @@ jobs:
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
         asset_path: ./uploads/PomfortProxyMac.zip
-        asset_name: PomfortProxy
+        asset_name: PomfortProxyMac.zip
         asset_content_type: application/zip
     - name: upload windows
       id: upload-windows
@@ -91,6 +91,6 @@ jobs:
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
         asset_path: ./uploads/PomfortProxyWindows.zip
-        asset_name: PomfortProxy.exe
+        asset_name: PomfortProxyWin.zip
         asset_content_type: application/zip                     
   
