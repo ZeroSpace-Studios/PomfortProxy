@@ -52,17 +52,7 @@ jobs:
     needs: [build-macos, build-windows]
 
     steps:
-    - uses: actions/checkout@v1
-    - name: create release
-      id: create_release
-      uses: actions/create-release@master
-      env:
-        GITHUB_TOKEN: ${{ secrets.TOKEN }}
-      with:
-        tag_name: ${{ github.ref }}
-        release_name: Release ${{ github.ref }}
-        draft: false
-        prerelease: false   
+    - uses: actions/checkout@v1   
     - name: download artifacts
       uses: actions/download-artifact@v1
       with:
@@ -75,18 +65,8 @@ jobs:
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
         asset_path: ./uploads/macos.zip
-        asset_name: macos.zip
-        asset_content_type: application/zip  
-    - name: upload linux
-      id: upload-linux
-      uses: actions/upload-release-asset@v1.0.1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./uploads/linux.zip
-        asset_name: linux.zip
-        asset_content_type: application/zip   
+        asset_name: PomfortProxy
+        asset_content_type: application/octet-stream 
     - name: upload windows
       id: upload-windows
       uses: actions/upload-release-asset@v1.0.1
@@ -95,6 +75,6 @@ jobs:
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
         asset_path: ./uploads/windows.zip
-        asset_name: windows.zip
-        asset_content_type: application/zip                        
+        asset_name: PomfortProxy.exe
+        asset_content_type: application/octet-stream                       
   
