@@ -62,15 +62,17 @@ jobs:
         tag_name: ${{ github.ref }}
         release_name: Release ${{ github.ref }}
         body: |
-          Changes in this Release
-          - First Change
-          - Second Change
+          Newest Push
         draft: false
         prerelease: false
     - name: download artifacts
       uses: actions/download-artifact@v1
       with:
-        name: uploads    
+        name: uploads
+    - name: compress macos
+      run: zip ./uploads/PomfortProxyMac.zip ./uploads/PomfortProxy
+    - name: compress windows
+      run: zip ./uploads/PomfortProxyWindows.zip ./uploads/PomfortProxy.exe
     - name: upload macos
       id: upload-macos 
       uses: actions/upload-release-asset@v1.0.1
@@ -78,9 +80,9 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./uploads/PomfortProxy
+        asset_path: ./uploads/PomfortProxyMac.zip
         asset_name: PomfortProxy
-        asset_content_type: application/octet-stream 
+        asset_content_type: application/zip
     - name: upload windows
       id: upload-windows
       uses: actions/upload-release-asset@v1.0.1
@@ -88,7 +90,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./uploads/PomfortProxy.exe
+        asset_path: ./uploads/PomfortProxyWindows.zip
         asset_name: PomfortProxy.exe
-        asset_content_type: application/octet-stream                       
+        asset_content_type: application/zip                     
   
