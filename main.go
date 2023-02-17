@@ -137,7 +137,6 @@ func setCDL(w http.ResponseWriter, req *http.Request) {
 	if err != nil {
 		log.Fatalln(err)
 	}
-
 	bd2, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
 		log.Fatalln(err)
